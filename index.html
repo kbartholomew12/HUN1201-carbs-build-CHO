@@ -6,7 +6,6 @@
   <title>Build-a-Carbohydrate Lab</title>
   <style>
     :root {
-      --bg: #f4f6f8;
       --card: #ffffff;
       --ink: #222;
       --muted: #5f6368;
@@ -25,9 +24,7 @@
       --shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -37,86 +34,30 @@
       line-height: 1.5;
     }
 
-    .app {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 24px;
-    }
+    .app { max-width: 1300px; margin: 0 auto; padding: 24px; }
 
-    .hero {
+    .hero, .card {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 30px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-
-    h1,h2,h3 {
-      margin-top: 0;
-      line-height: 1.15;
-    }
-
-    h1 {
-      color: var(--secondary);
-      font-size: clamp(2rem, 3vw, 3.2rem);
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      max-width: 900px;
-      font-size: 1.05rem;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .badge {
-      background: var(--secondary-light);
-      color: var(--secondary);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 980px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 22px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
 
-    .toolbox {
-      position: sticky;
-      top: 20px;
-      align-self: start;
-    }
+    .hero { padding: 30px; margin-bottom: 20px; }
+    .card { padding: 22px; }
 
-    .sugar-bank {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 14px;
-    }
+    h1,h2,h3 { margin-top: 0; line-height: 1.15; }
+    h1 { color: var(--secondary); font-size: clamp(2rem, 3vw, 3.2rem); margin-bottom: 10px; }
+    .subtitle { color: var(--muted); max-width: 900px; font-size: 1.05rem; }
+
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .badge { background: var(--secondary-light); color: var(--secondary); padding: 8px 12px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; }
+
+    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 20px; }
+    @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
+
+    .toolbox { position: sticky; top: 20px; align-self: start; }
+    .sugar-bank { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
 
     .sugar {
       width: 82px;
@@ -134,16 +75,13 @@
       transition: transform 0.15s ease;
     }
 
-    .sugar:hover {
-      transform: scale(1.05);
-    }
-
+    .sugar:hover { transform: scale(1.05); }
     .glucose { background: #1f7a8c; }
     .fructose { background: #7b2cbf; }
     .galactose { background: #ef476f; }
 
     .workspace {
-      min-height: 250px;
+      min-height: 230px;
       border: 3px dashed #b8bec5;
       border-radius: var(--radius);
       padding: 20px;
@@ -155,32 +93,11 @@
       margin-top: 16px;
     }
 
-    .workspace .sugar {
-      cursor: pointer;
-      position: relative;
-    }
+    .workspace .sugar { cursor: pointer; position: relative; }
+    .workspace .sugar::after { content: "↔"; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: #666; font-size: 1.4rem; font-weight: 700; }
+    .workspace .sugar:last-child::after { content: ""; }
 
-    .workspace .sugar::after {
-      content: "↔";
-      position: absolute;
-      right: -14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #666;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .workspace .sugar:last-child::after {
-      content: "";
-    }
-
-    .structure-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
+    .structure-controls { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 
     button {
       border: 2px solid var(--border);
@@ -194,270 +111,152 @@
       transition: transform 0.15s ease, background 0.15s ease;
     }
 
-    button:hover {
-      transform: translateY(-1px);
+    button:hover { transform: translateY(-1px); }
+    .primary-btn { background: var(--secondary); color: white; border-color: var(--secondary); }
+    .secondary-btn { background: var(--primary); color: white; border-color: var(--primary); }
+    .danger-btn { background: white; color: var(--danger); border-color: var(--danger); }
+
+    .challenge-box {
+      background: var(--primary-light);
+      border: 1px solid #afdde2;
+      border-left: 8px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
     }
 
-    .primary-btn {
-      background: var(--secondary);
-      color: white;
-      border-color: var(--secondary);
-    }
+    .challenge-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .challenge-nav button { font-size: 0.9rem; padding: 9px 11px; }
+    .challenge-nav button.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .challenge-nav button.complete { background: var(--success); color: white; border-color: var(--success); }
 
-    .secondary-btn {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
+    .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px; }
+    .analysis-box { border-radius: 16px; padding: 16px; border: 1px solid var(--border); background: #fafafa; }
+    .analysis-box h3 { color: var(--primary); margin-bottom: 10px; }
 
-    .danger-btn {
-      background: white;
-      color: var(--danger);
-      border-color: var(--danger);
-    }
-
-    .analysis-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .analysis-box {
-      border-radius: 16px;
-      padding: 16px;
-      border: 1px solid var(--border);
-      background: #fafafa;
-    }
-
-    .analysis-box h3 {
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    .meter-wrap {
-      margin-top: 10px;
-    }
-
-    .meter {
-      height: 18px;
-      border-radius: 999px;
-      background: #ececec;
-      overflow: hidden;
-      border: 1px solid #d0d0d0;
-    }
-
-    .meter-fill {
-      height: 100%;
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
+    .meter-wrap { margin-top: 10px; }
+    .meter { height: 18px; border-radius: 999px; background: #ececec; overflow: hidden; border: 1px solid #d0d0d0; }
+    .meter-fill { height: 100%; width: 0%; transition: width 0.4s ease; }
     .digestibility { background: var(--primary); }
     .glycemic { background: var(--warning); }
     .fiber-meter { background: var(--success); }
 
-    .feedback {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      display: none;
-    }
+    .feedback { margin-top: 18px; padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); display: none; }
+    .feedback.show { display: block; }
+    .feedback.good { background: var(--success-light); border-color: #badfbd; }
+    .feedback.warning { background: var(--warning-light); border-color: #ffd7a1; }
+    .feedback.info { background: var(--secondary-light); border-color: #d5c0ef; }
+    .feedback.danger { background: var(--danger-light); border-color: #f1b8b4; }
 
-    .feedback.show {
-      display: block;
-    }
+    .reflection-box { width: 100%; min-height: 150px; border-radius: 16px; border: 2px solid var(--border); padding: 14px; margin-top: 12px; font-size: 1rem; resize: vertical; }
+    .summary-box { margin-top: 20px; border-radius: var(--radius); border: 2px dashed var(--secondary); padding: 20px; background: white; }
+    .hidden { display: none !important; }
 
-    .feedback.good {
-      background: var(--success-light);
-      border-color: #badfbd;
-    }
+    .callout { margin-top: 16px; border-left: 8px solid var(--warning); background: var(--warning-light); padding: 16px; border-radius: var(--radius); }
+    .small-note { color: var(--muted); font-size: 0.92rem; }
+    .legend { margin-top: 14px; display: grid; gap: 8px; font-size: 0.95rem; }
+    .legend span { display: flex; align-items: center; gap: 8px; }
+    .mini { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
 
-    .feedback.warning {
-      background: var(--warning-light);
-      border-color: #ffd7a1;
-    }
-
-    .feedback.info {
-      background: var(--secondary-light);
-      border-color: #d5c0ef;
-    }
-
-    .reflection-box {
-      width: 100%;
-      min-height: 120px;
-      border-radius: 16px;
-      border: 2px solid var(--border);
-      padding: 14px;
-      margin-top: 12px;
-      font-size: 1rem;
-      resize: vertical;
-    }
-
-    .summary-box {
-      margin-top: 20px;
-      border-radius: var(--radius);
-      border: 2px dashed var(--secondary);
-      padding: 20px;
-      background: white;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .callout {
-      margin-top: 16px;
-      border-left: 8px solid var(--warning);
-      background: var(--warning-light);
-      padding: 16px;
-      border-radius: var(--radius);
-    }
-
-    .small-note {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .legend {
-      margin-top: 14px;
-      display: grid;
-      gap: 8px;
-      font-size: 0.95rem;
-    }
-
-    .legend span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .mini {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    pre {
-      white-space: pre-wrap;
-      background: #fafafa;
-      border: 1px solid var(--border);
-      padding: 16px;
-      border-radius: 14px;
-      overflow-x: auto;
-    }
+    pre { white-space: pre-wrap; background: #fafafa; border: 1px solid var(--border); padding: 16px; border-radius: 14px; overflow-x: auto; }
   </style>
 </head>
 <body>
   <main class="app">
     <section class="hero">
       <h1>Build-a-Carbohydrate Lab™</h1>
-      <p class="subtitle">Construct carbohydrate structures, predict digestion, test blood glucose response, and discover how molecular structure changes physiology.</p>
-
+      <p class="subtitle">Construct carbohydrate structures, check your work, compare digestion, and explain how structure affects blood glucose.</p>
       <div class="badge-row">
         <span class="badge">Monosaccharides</span>
         <span class="badge">Disaccharides</span>
-        <span class="badge">Starch</span>
-        <span class="badge">Glycogen</span>
+        <span class="badge">Polysaccharides</span>
         <span class="badge">Fiber</span>
         <span class="badge">Digestibility</span>
+        <span class="badge">Blood Glucose</span>
       </div>
     </section>
 
     <div class="layout">
       <aside class="card toolbox">
         <h2>Sugar Building Blocks</h2>
-        <p>Drag sugars into the workspace to build a carbohydrate structure.</p>
-
+        <p>Drag sugars into the workspace to build the structure requested in the current challenge.</p>
         <div class="sugar-bank">
           <div class="sugar glucose" draggable="true" data-type="glucose">Glucose</div>
           <div class="sugar fructose" draggable="true" data-type="fructose">Fructose</div>
           <div class="sugar galactose" draggable="true" data-type="galactose">Galactose</div>
         </div>
-
         <div class="legend">
-          <span><span class="mini glucose"></span> Glucose = primary blood sugar molecule</span>
-          <span><span class="mini fructose"></span> Fructose = fruit sugar</span>
-          <span><span class="mini galactose"></span> Galactose = component of lactose</span>
+          <span><span class="mini glucose"></span> Glucose</span>
+          <span><span class="mini fructose"></span> Fructose</span>
+          <span><span class="mini galactose"></span> Galactose</span>
         </div>
-
         <div class="callout">
-          <strong>Tip:</strong> Try building:
+          <strong>How to use this lab:</strong>
           <ul>
-            <li>Single sugars</li>
-            <li>Two linked sugars</li>
-            <li>Long chains</li>
-            <li>Mostly glucose chains</li>
+            <li>Choose the challenge at the top.</li>
+            <li>Drag the correct sugars into the workspace.</li>
+            <li>Click <strong>Check This Structure</strong>.</li>
+            <li>Your attempts will be saved for the PDF.</li>
           </ul>
         </div>
       </aside>
 
       <section class="card">
-        <h2>Your Carbohydrate Structure</h2>
-        <p class="small-note">Click any sugar in the workspace to remove it.</p>
+        <div class="challenge-box">
+          <h2 id="challengeTitle">Challenge</h2>
+          <p id="challengeDirections"></p>
+          <div class="challenge-nav" id="challengeNav"></div>
+        </div>
 
+        <div class="analysis-box" style="margin-bottom:20px; background:#f8f9fb;">
+          <h2>Required Structures Checklist</h2>
+          <div id="checklist"></div>
+        </div>
+
+        <h2>Your Workspace</h2>
+        <p class="small-note">Click any sugar in the workspace to remove it.</p>
         <div id="workspace" class="workspace">
-          <p id="workspacePlaceholder">Drag sugars here to build a carbohydrate.</p>
+          <p id="workspacePlaceholder">Drag sugars here to build your carbohydrate.</p>
         </div>
 
         <div class="structure-controls">
-          <button class="primary-btn" id="analyzeBtn">Analyze Structure</button>
-          <button class="secondary-btn" id="digestBtn">Simulate Digestion</button>
-          <button class="danger-btn" id="clearBtn">Clear Structure</button>
+          <button class="primary-btn" id="checkBtn">Check This Structure</button>
+          <button class="secondary-btn" id="digestBtn">Analyze Digestion & Blood Sugar</button>
+          <button class="danger-btn" id="clearBtn">Clear Workspace</button>
         </div>
 
         <div class="analysis-grid">
           <div class="analysis-box">
-            <h3>Structure Type</h3>
-            <p id="structureType">No structure built yet.</p>
+            <h3>Structure Result</h3>
+            <p id="structureType">No structure checked yet.</p>
           </div>
-
           <div class="analysis-box">
             <h3>Digestibility</h3>
-            <div class="meter-wrap">
-              <div class="meter">
-                <div class="meter-fill digestibility" id="digestMeter"></div>
-              </div>
-            </div>
-            <p id="digestText">Build a structure to analyze digestion.</p>
+            <div class="meter-wrap"><div class="meter"><div class="meter-fill digestibility" id="digestMeter"></div></div></div>
+            <p id="digestText">Complete a structure to analyze digestion.</p>
           </div>
-
           <div class="analysis-box">
             <h3>Predicted Blood Sugar Impact</h3>
-            <div class="meter-wrap">
-              <div class="meter">
-                <div class="meter-fill glycemic" id="glycemicMeter"></div>
-              </div>
-            </div>
-            <p id="glycemicText">Build a structure to analyze glycemic response.</p>
+            <div class="meter-wrap"><div class="meter"><div class="meter-fill glycemic" id="glycemicMeter"></div></div></div>
+            <p id="glycemicText">Complete a structure to analyze blood glucose response.</p>
           </div>
-
           <div class="analysis-box">
             <h3>Fiber Characteristics</h3>
-            <div class="meter-wrap">
-              <div class="meter">
-                <div class="meter-fill fiber-meter" id="fiberMeter"></div>
-              </div>
-            </div>
-            <p id="fiberText">Build a structure to analyze fiber characteristics.</p>
+            <div class="meter-wrap"><div class="meter"><div class="meter-fill fiber-meter" id="fiberMeter"></div></div></div>
+            <p id="fiberText">Complete the fiber challenge to analyze fiber characteristics.</p>
           </div>
         </div>
 
         <div id="feedback" class="feedback"></div>
 
         <div class="summary-box">
-          <h2>Reflection & Physiology Explanation</h2>
-          <p>Explain how the structure of your carbohydrate affects digestion, blood glucose, and physiological response.</p>
-
-          <textarea id="reflection" class="reflection-box" placeholder="Explain why your carbohydrate structure would digest quickly or slowly, whether it resembles sugar, starch, glycogen, or fiber, and how it would likely affect blood glucose levels."></textarea>
-
+          <h2>Required Reflection</h2>
+          <p>Explain how simple sugars compare to complex polysaccharides and fiber in digestion, absorption, blood glucose response, and physiological effects.</p>
+          <textarea id="reflection" class="reflection-box" placeholder="Compare simple sugars, complex polysaccharides, and fiber. Explain which digest faster, which raise blood glucose more quickly, and why fiber is not digested the same way as starch or sugars."></textarea>
           <div class="structure-controls">
             <button class="primary-btn" id="summaryBtn">Generate Submission Summary</button>
             <button class="secondary-btn hidden" id="pdfBtn">Download/Save PDF</button>
           </div>
-
           <div id="summaryOutput" class="hidden">
             <h3>Canvas Submission Summary</h3>
             <pre id="summaryText"></pre>
@@ -468,9 +267,10 @@
   </main>
 
   <script>
+    'use strict';
+
     const workspace = document.getElementById('workspace');
     const placeholder = document.getElementById('workspacePlaceholder');
-
     const structureType = document.getElementById('structureType');
     const digestMeter = document.getElementById('digestMeter');
     const digestText = document.getElementById('digestText');
@@ -484,315 +284,458 @@
     const pdfBtn = document.getElementById('pdfBtn');
     const summaryOutput = document.getElementById('summaryOutput');
     const summaryText = document.getElementById('summaryText');
+    const checklist = document.getElementById('checklist');
+    const challengeTitle = document.getElementById('challengeTitle');
+    const challengeDirections = document.getElementById('challengeDirections');
+    const challengeNav = document.getElementById('challengeNav');
 
+    const challenges = {
+      sucrose: {
+        label: 'Sucrose',
+        directions: 'Build sucrose using the correct two monosaccharides. The lab will tell you whether your structure is correct or incorrect.',
+        correct: ['glucose', 'fructose'],
+        type: 'Sucrose',
+        digestibility: 90,
+        glycemic: 80,
+        fiber: 5,
+        explanation: 'Sucrose is a disaccharide. It must be broken into monosaccharides before absorption. Because it contains a glucose unit and is relatively simple, it can contribute to a faster blood glucose rise.'
+      },
+      lactose: {
+        label: 'Lactose',
+        directions: 'Build lactose using the correct two monosaccharides. The lab will tell you whether your structure is correct or incorrect.',
+        correct: ['glucose', 'galactose'],
+        type: 'Lactose',
+        digestibility: 75,
+        glycemic: 60,
+        fiber: 5,
+        explanation: 'Lactose is a disaccharide found naturally in milk. It requires the enzyme lactase before its monosaccharides can be absorbed.'
+      },
+      maltose: {
+        label: 'Maltose',
+        directions: 'Build maltose using the correct two monosaccharides. The lab will tell you whether your structure is correct or incorrect.',
+        correct: ['glucose', 'glucose'],
+        type: 'Maltose',
+        digestibility: 85,
+        glycemic: 75,
+        fiber: 5,
+        explanation: 'Maltose is a disaccharide produced during starch digestion. Because it contains two glucose units, it can contribute directly to blood glucose after digestion.'
+      },
+      starch: {
+        label: 'Polysaccharide A',
+        directions: 'Construct a straight chain of exactly 6 glucose molecules. Do not add fructose or galactose.',
+        correct: ['glucose','glucose','glucose','glucose','glucose','glucose'],
+        type: 'Starch-like Polysaccharide',
+        digestibility: 70,
+        glycemic: 55,
+        fiber: 15,
+        explanation: 'This structure represents a digestible glucose polysaccharide. It requires more digestive breakdown than simple sugars, so glucose is released more gradually.'
+      },
+      glycogen: {
+        label: 'Polysaccharide B',
+        directions: 'Construct a glucose storage molecule using exactly 8 glucose molecules. This represents a larger glucose storage structure.',
+        correct: ['glucose','glucose','glucose','glucose','glucose','glucose','glucose','glucose'],
+        type: 'Glycogen-like Polysaccharide',
+        digestibility: 80,
+        glycemic: 65,
+        fiber: 10,
+        explanation: 'This structure represents a glucose storage polysaccharide. In the body, glycogen is stored in liver and muscle and can be broken down when glucose is needed.'
+      },
+      fiber: {
+        label: 'Fiber Structure',
+        directions: 'Construct a fiber-like chain using exactly 7 glucose molecules. This challenge represents a carbohydrate made of glucose units but arranged with bonds humans cannot efficiently digest.',
+        correct: ['glucose','glucose','glucose','glucose','glucose','glucose','glucose'],
+        type: 'Fiber-like Carbohydrate',
+        digestibility: 10,
+        glycemic: 10,
+        fiber: 95,
+        explanation: 'Fiber can be made from glucose units, but humans cannot digest certain bonds, such as beta-linkages in cellulose. This is why fiber does not raise blood glucose like digestible starch and instead supports bowel regularity, satiety, and gut health.'
+      }
+    };
+
+    let currentChallenge = 'sucrose';
     let structure = [];
+    let completedTasks = { sucrose: false, lactose: false, maltose: false, starch: false, glycogen: false, fiber: false };
+    let attempts = { sucrose: [], lactose: [], maltose: [], starch: [], glycogen: [], fiber: [] };
+    let analyses = { sucrose: null, lactose: null, maltose: null, starch: null, glycogen: null, fiber: null };
     let latestAnalysis = null;
 
-    document.querySelectorAll('.sugar').forEach(sugar => {
-      sugar.addEventListener('dragstart', e => {
-        e.dataTransfer.setData('text/plain', sugar.dataset.type);
+    document.querySelectorAll('.sugar-bank .sugar').forEach((sugar) => {
+      sugar.addEventListener('dragstart', (event) => {
+        event.dataTransfer.setData('text/plain', sugar.dataset.type);
       });
     });
 
-    workspace.addEventListener('dragover', e => {
-      e.preventDefault();
-    });
-
-    workspace.addEventListener('drop', e => {
-      e.preventDefault();
-      const type = e.dataTransfer.getData('text/plain');
-      addSugar(type);
+    workspace.addEventListener('dragover', (event) => event.preventDefault());
+    workspace.addEventListener('drop', (event) => {
+      event.preventDefault();
+      const type = event.dataTransfer.getData('text/plain');
+      if (type) addSugar(type);
     });
 
     function addSugar(type) {
       placeholder.classList.add('hidden');
-
       const div = document.createElement('div');
-      div.className = `sugar ${type}`;
+      div.className = 'sugar ' + type;
       div.dataset.type = type;
       div.textContent = capitalize(type);
-
       div.addEventListener('click', () => {
-        workspace.removeChild(div);
-        structure = structure.filter((_, i) => i !== [...workspace.querySelectorAll('.workspace .sugar')].indexOf(div));
-        if (workspace.querySelectorAll('.workspace .sugar').length === 0) {
-          placeholder.classList.remove('hidden');
-        }
+        const sugars = Array.from(workspace.querySelectorAll('.sugar'));
+        const index = sugars.indexOf(div);
+        if (index > -1) structure.splice(index, 1);
+        div.remove();
+        if (structure.length === 0) placeholder.classList.remove('hidden');
+        resetAnalysisDisplay();
       });
-
       workspace.appendChild(div);
       structure.push(type);
     }
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
-      workspace.querySelectorAll('.workspace .sugar').forEach(el => el.remove());
+    function clearWorkspace() {
+      workspace.querySelectorAll('.sugar').forEach((element) => element.remove());
       structure = [];
       placeholder.classList.remove('hidden');
-      resetAnalysis();
-    });
+      resetAnalysisDisplay();
+    }
 
-    function resetAnalysis() {
-      structureType.textContent = 'No structure built yet.';
+    document.getElementById('clearBtn').addEventListener('click', clearWorkspace);
+
+    function resetAnalysisDisplay() {
+      structureType.textContent = 'No structure checked yet.';
       digestMeter.style.width = '0%';
       glycemicMeter.style.width = '0%';
       fiberMeter.style.width = '0%';
-      digestText.textContent = 'Build a structure to analyze digestion.';
-      glycemicText.textContent = 'Build a structure to analyze glycemic response.';
-      fiberText.textContent = 'Build a structure to analyze fiber characteristics.';
+      digestText.textContent = 'Complete a structure to analyze digestion.';
+      glycemicText.textContent = 'Complete a structure to analyze blood glucose response.';
+      fiberText.textContent = 'Complete the fiber challenge to analyze fiber characteristics.';
       feedback.className = 'feedback';
       feedback.innerHTML = '';
       latestAnalysis = null;
     }
 
-    function analyzeStructure() {
+    function renderChallengeNav() {
+      challengeNav.innerHTML = '';
+      Object.entries(challenges).forEach(([key, challenge]) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = challenge.label;
+        if (key === currentChallenge) btn.classList.add('active');
+        if (completedTasks[key]) btn.classList.add('complete');
+        btn.addEventListener('click', () => {
+          currentChallenge = key;
+          clearWorkspace();
+          renderCurrentChallenge();
+        });
+        challengeNav.appendChild(btn);
+      });
+    }
+
+    function renderCurrentChallenge() {
+      const challenge = challenges[currentChallenge];
+      challengeTitle.textContent = challenge.label;
+      challengeDirections.textContent = challenge.directions;
+      renderChecklist();
+      renderChallengeNav();
+    }
+
+    function renderChecklist() {
+      checklist.innerHTML = [
+        '<ul>',
+        '<li>' + (completedTasks.sucrose ? '✅' : '⬜') + ' Build sucrose using the correct two monosaccharides.</li>',
+        '<li>' + (completedTasks.lactose ? '✅' : '⬜') + ' Build lactose using the correct two monosaccharides.</li>',
+        '<li>' + (completedTasks.maltose ? '✅' : '⬜') + ' Build maltose using the correct two monosaccharides.</li>',
+        '<li>' + (completedTasks.starch ? '✅' : '⬜') + ' Polysaccharide A: straight chain of exactly 6 glucose molecules.</li>',
+        '<li>' + (completedTasks.glycogen ? '✅' : '⬜') + ' Polysaccharide B: glucose storage molecule using exactly 8 glucose molecules.</li>',
+        '<li>' + (completedTasks.fiber ? '✅' : '⬜') + ' Fiber: chain of exactly 7 glucose molecules arranged as a fiber-like structure.</li>',
+        '</ul>'
+      ].join('');
+    }
+
+    function sameStructure(a, b) {
+      if (a.length !== b.length) return false;
+      const sortedA = a.slice().sort();
+      const sortedB = b.slice().sort();
+      return sortedA.every((value, index) => value === sortedB[index]);
+    }
+
+    function checkStructure() {
       if (structure.length === 0) {
         showFeedback('warning', 'No structure detected.', 'Build a carbohydrate structure first.');
         return;
       }
 
-      const glucoseCount = structure.filter(s => s === 'glucose').length;
-      const fructoseCount = structure.filter(s => s === 'fructose').length;
-      const galactoseCount = structure.filter(s => s === 'galactose').length;
+      const challenge = challenges[currentChallenge];
+      const attempt = structure.slice();
+      const correct = sameStructure(attempt, challenge.correct);
 
-      let type = '';
-      let digestibility = 0;
-      let glycemic = 0;
-      let fiber = 0;
-      let explanation = '';
+      attempts[currentChallenge].push({
+        attempt: attempt,
+        correct: correct,
+        time: new Date().toLocaleString()
+      });
 
-      if (structure.length === 1) {
-        type = 'Monosaccharide';
-        digestibility = 95;
-        glycemic = 85;
-        fiber = 5;
-        explanation = 'Single sugars digest rapidly because very little breakdown is required before absorption.';
-      }
-      else if (structure.length === 2) {
-        type = 'Disaccharide';
-        digestibility = 85;
-        glycemic = 75;
-        fiber = 5;
-
-        if (glucoseCount === 1 && fructoseCount === 1) {
-          explanation = 'This resembles sucrose (table sugar), which digests relatively quickly and can raise blood glucose rapidly.';
-        }
-        else if (glucoseCount === 1 && galactoseCount === 1) {
-          explanation = 'This resembles lactose, the sugar naturally found in milk.';
-        }
-        else {
-          explanation = 'Two linked sugars form a disaccharide that must be broken apart before absorption.';
-        }
-      }
-      else if (structure.length >= 3 && glucoseCount === structure.length) {
-        type = 'Complex Carbohydrate (Starch/Glycogen-like)';
-        digestibility = 70;
-        glycemic = 60;
-        fiber = 15;
-
-        if (structure.length >= 6) {
-          explanation = 'Large glucose chains resemble storage carbohydrates such as glycogen or starch. The body can digest these, but digestion takes longer than simple sugars.';
-        } else {
-          explanation = 'Small glucose chains begin to resemble starches and digest more gradually than simple sugars.';
-        }
-      }
-      else if (structure.length >= 5 && fructoseCount > 0) {
-        type = 'Mixed Complex Carbohydrate';
-        digestibility = 55;
-        glycemic = 45;
-        fiber = 25;
-        explanation = 'Mixed sugar structures may digest more slowly and create a more moderate blood glucose response.';
-      }
-      else {
-        type = 'Fiber-like/Complex Structure';
-        digestibility = 25;
-        glycemic = 20;
-        fiber = 85;
-        explanation = 'This structure resembles a more complex carbohydrate that may resist digestion and function more like dietary fiber.';
+      if (correct) {
+        completedTasks[currentChallenge] = true;
+        const analysis = {
+          challenge: challenge.label,
+          type: challenge.type,
+          digestibility: challenge.digestibility,
+          glycemic: challenge.glycemic,
+          fiber: challenge.fiber,
+          explanation: challenge.explanation,
+          structure: attempt
+        };
+        analyses[currentChallenge] = analysis;
+        latestAnalysis = analysis;
+        showAnalysis(analysis);
+        showFeedback('good', '✅ Correct Structure', challenge.label + ' was built correctly. Now review how this structure affects digestion and blood glucose.');
+      } else {
+        latestAnalysis = null;
+        resetMetersOnly();
+        structureType.textContent = 'Incorrect attempt for this challenge.';
+        showFeedback('danger', '❌ Incorrect Structure', 'This does not match the required structure for ' + challenge.label + '. Your attempt was saved for the PDF. Clear the workspace and try again.');
       }
 
-      latestAnalysis = {
-        type,
-        digestibility,
-        glycemic,
-        fiber,
-        explanation,
-        structure: [...structure]
-      };
+      renderCurrentChallenge();
+    }
 
-      structureType.textContent = type;
-      digestMeter.style.width = `${digestibility}%`;
-      glycemicMeter.style.width = `${glycemic}%`;
-      fiberMeter.style.width = `${fiber}%`;
+    function resetMetersOnly() {
+      digestMeter.style.width = '0%';
+      glycemicMeter.style.width = '0%';
+      fiberMeter.style.width = '0%';
+      digestText.textContent = 'Correct the structure before analyzing digestion.';
+      glycemicText.textContent = 'Correct the structure before analyzing blood glucose response.';
+      fiberText.textContent = 'Correct the structure before analyzing fiber characteristics.';
+    }
 
-      digestText.textContent = digestibility > 75
-        ? 'Highly digestible. Glucose enters the bloodstream quickly.'
-        : digestibility > 45
-        ? 'Moderately digestible. Digestion occurs more gradually.'
-        : 'Poorly digestible. This resembles fiber-like structures.';
+    function showAnalysis(analysis) {
+      structureType.textContent = analysis.type;
+      digestMeter.style.width = analysis.digestibility + '%';
+      glycemicMeter.style.width = analysis.glycemic + '%';
+      fiberMeter.style.width = analysis.fiber + '%';
 
-      glycemicText.textContent = glycemic > 70
-        ? 'Likely to raise blood glucose rapidly.'
-        : glycemic > 40
-        ? 'Moderate blood glucose impact.'
-        : 'Likely to produce a slower blood glucose response.';
+      digestText.textContent = analysis.digestibility > 75
+        ? 'Highly digestible. Breakdown and absorption are relatively fast.'
+        : analysis.digestibility > 45
+          ? 'Moderately digestible. Digestion is more gradual than simple sugars.'
+          : 'Poorly digested by human enzymes. This behaves more like fiber.';
 
-      fiberText.textContent = fiber > 70
+      glycemicText.textContent = analysis.glycemic > 70
+        ? 'Higher predicted blood glucose impact.'
+        : analysis.glycemic > 40
+          ? 'Moderate predicted blood glucose impact.'
+          : 'Low predicted blood glucose impact.';
+
+      fiberText.textContent = analysis.fiber > 70
         ? 'Strong fiber-like characteristics.'
-        : fiber > 30
-        ? 'Some fiber-like properties present.'
-        : 'Minimal fiber-like properties.';
-
-      showFeedback('info', type, explanation);
+        : analysis.fiber > 30
+          ? 'Some fiber-like properties.'
+          : 'Minimal fiber-like properties.';
     }
 
-    function showFeedback(style, title, text) {
-      feedback.className = `feedback show ${style}`;
-      feedback.innerHTML = `
-        <h3>${title}</h3>
-        <p>${text}</p>
-      `;
-    }
-
-    document.getElementById('analyzeBtn').addEventListener('click', analyzeStructure);
+    document.getElementById('checkBtn').addEventListener('click', checkStructure);
 
     document.getElementById('digestBtn').addEventListener('click', () => {
       if (!latestAnalysis) {
-        analyzeStructure();
+        showFeedback('warning', 'Check the structure first.', 'You need to build and correctly check the current structure before analyzing digestion and blood glucose.');
+        return;
       }
-
-      if (!latestAnalysis) return;
-
-      let digestionMessage = '';
-
-      if (latestAnalysis.digestibility > 80) {
-        digestionMessage = 'Digestive enzymes quickly break apart this structure in the mouth and small intestine. Glucose enters the bloodstream rapidly.';
-      }
-      else if (latestAnalysis.digestibility > 50) {
-        digestionMessage = 'Digestion occurs more gradually. Blood glucose rises more moderately over time.';
-      }
-      else {
-        digestionMessage = 'This structure resists digestion. Much of it may function similarly to dietary fiber and support bowel health.';
-      }
-
-      showFeedback('good', 'Digestion Simulation Complete', digestionMessage);
+      showAnalysis(latestAnalysis);
+      showFeedback('info', 'Digestion & Blood Sugar Analysis', latestAnalysis.explanation);
     });
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function showFeedback(style, title, text) {
+      feedback.className = 'feedback show ' + style;
+      feedback.innerHTML = '<h3>' + escapeHtml(title) + '</h3><p>' + escapeHtml(text) + '</p>';
+    }
 
     function capitalize(word) {
       return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
+    function formatStructure(arr) {
+      return arr.length ? arr.map(capitalize).join(' → ') : 'No structure';
+    }
+
+    function formatAttempts(key) {
+      const list = attempts[key];
+      if (!list.length) return 'No attempts recorded';
+      return list.map((item, index) => {
+        return 'Attempt ' + (index + 1) + ': ' + formatStructure(item.attempt) + ' — ' + (item.correct ? 'Correct' : 'Incorrect');
+      }).join('\n');
+    }
+
+    function allTasksComplete() {
+      return Object.values(completedTasks).every((value) => value === true);
+    }
+
+    function buildSubmissionSummary(reflectionText) {
+      return [
+        'Build-a-Carbohydrate Lab Completion Summary',
+        '=================================================',
+        '',
+        'Required Structures Completed:',
+        '- Sucrose: ' + (completedTasks.sucrose ? 'Completed' : 'Incomplete'),
+        '- Lactose: ' + (completedTasks.lactose ? 'Completed' : 'Incomplete'),
+        '- Maltose: ' + (completedTasks.maltose ? 'Completed' : 'Incomplete'),
+        '- Polysaccharide A: ' + (completedTasks.starch ? 'Completed' : 'Incomplete'),
+        '- Polysaccharide B: ' + (completedTasks.glycogen ? 'Completed' : 'Incomplete'),
+        '- Fiber Structure: ' + (completedTasks.fiber ? 'Completed' : 'Incomplete'),
+        '',
+        'Student Attempts',
+        '=================================================',
+        '',
+        'Sucrose Attempts:',
+        formatAttempts('sucrose'),
+        '',
+        'Lactose Attempts:',
+        formatAttempts('lactose'),
+        '',
+        'Maltose Attempts:',
+        formatAttempts('maltose'),
+        '',
+        'Polysaccharide A Attempts:',
+        formatAttempts('starch'),
+        '',
+        'Polysaccharide B Attempts:',
+        formatAttempts('glycogen'),
+        '',
+        'Fiber Attempts:',
+        formatAttempts('fiber'),
+        '',
+        'Digestion and Blood Glucose Analysis',
+        '=================================================',
+        '',
+        'Sucrose:',
+        analyses.sucrose.explanation,
+        'Digestibility: ' + analyses.sucrose.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.sucrose.glycemic + '%',
+        '',
+        'Lactose:',
+        analyses.lactose.explanation,
+        'Digestibility: ' + analyses.lactose.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.lactose.glycemic + '%',
+        '',
+        'Maltose:',
+        analyses.maltose.explanation,
+        'Digestibility: ' + analyses.maltose.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.maltose.glycemic + '%',
+        '',
+        'Polysaccharide A:',
+        analyses.starch.explanation,
+        'Digestibility: ' + analyses.starch.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.starch.glycemic + '%',
+        '',
+        'Polysaccharide B:',
+        analyses.glycogen.explanation,
+        'Digestibility: ' + analyses.glycogen.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.glycogen.glycemic + '%',
+        '',
+        'Fiber:',
+        analyses.fiber.explanation,
+        'Digestibility: ' + analyses.fiber.digestibility + '%',
+        'Blood Glucose Impact: ' + analyses.fiber.glycemic + '%',
+        'Fiber Characteristics: ' + analyses.fiber.fiber + '%',
+        '',
+        'Student Reflection',
+        '=================================================',
+        reflectionText
+      ].join('\n');
+    }
+
     summaryBtn.addEventListener('click', () => {
-      if (!latestAnalysis) {
-        analyzeStructure();
-      }
-
-      const reflectionText = reflection.value.trim();
-
-      if (reflectionText.length < 50) {
-        showFeedback('warning', 'More explanation needed.', 'Please write at least 2–3 sentences explaining the physiology of your carbohydrate structure.');
+      if (!allTasksComplete()) {
+        showFeedback('warning', 'Complete all required structures first.', 'You must correctly complete all disaccharide, polysaccharide, and fiber challenges before generating your submission summary.');
         return;
       }
 
-      const summary = `Build-a-Carbohydrate Lab Completion Summary
-=================================================
+      const reflectionText = reflection.value.trim();
+      if (reflectionText.length < 100) {
+        showFeedback('warning', 'More explanation needed.', 'Please write a complete explanation comparing simple sugars, complex polysaccharides, and fiber. Aim for at least 4–5 strong sentences.');
+        return;
+      }
 
-Structure Built:
-${latestAnalysis.structure.map(capitalize).join(' → ')}
-
-Predicted Structure Type:
-${latestAnalysis.type}
-
-Digestibility Score:
-${latestAnalysis.digestibility}%
-
-Predicted Blood Sugar Impact:
-${latestAnalysis.glycemic}%
-
-Fiber Characteristics:
-${latestAnalysis.fiber}%
-
-Physiology Explanation:
-${latestAnalysis.explanation}
-
-Student Reflection:
-${reflectionText}
-
-Reflection Prompt:
-One concept I understand better after building this structure is...
-`;
-
+      const summary = buildSubmissionSummary(reflectionText);
       summaryOutput.classList.remove('hidden');
       summaryText.textContent = summary;
       pdfBtn.classList.remove('hidden');
-
       showFeedback('good', 'Submission Summary Generated', 'Your Canvas submission summary is ready. Save it as a PDF and upload it to Canvas.');
     });
 
     pdfBtn.addEventListener('click', () => {
-      const content = summaryText.textContent
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+      const content = summaryText.textContent || '';
+      if (!content.trim()) {
+        showFeedback('warning', 'Generate the summary first.', 'Please generate the submission summary before saving the PDF.');
+        return;
+      }
 
       const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        showFeedback('warning', 'Pop-up blocked.', 'Your browser blocked the PDF window. Allow pop-ups for this page and try again.');
+        return;
+      }
 
-      printWindow.document.write(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <title>Build-a-Carbohydrate Lab Submission</title>
-          <style>
-            body {
-              font-family: Arial, Helvetica, sans-serif;
-              padding: 30px;
-              line-height: 1.5;
-              color: #222;
-            }
-            h1 {
-              color: #7b2cbf;
-            }
-            .directions {
-              background: #f1e7fb;
-              border: 2px solid #7b2cbf;
-              border-radius: 12px;
-              padding: 16px;
-              margin: 18px 0;
-            }
-            pre {
-              white-space: pre-wrap;
-              border: 1px solid #ccc;
-              border-radius: 12px;
-              padding: 16px;
-              background: #fafafa;
-            }
-          </style>
-        </head>
-        <body>
-          <h1>Build-a-Carbohydrate Lab™</h1>
+      const pdfHtml = [
+        '<!DOCTYPE html>',
+        '<html lang="en">',
+        '<head>',
+        '<meta charset="UTF-8">',
+        '<title>Build-a-Carbohydrate Lab Submission</title>',
+        '<style>',
+        'body { font-family: Arial, Helvetica, sans-serif; padding: 30px; line-height: 1.5; color: #222; }',
+        'h1 { color: #7b2cbf; }',
+        '.directions { background: #f1e7fb; border: 2px solid #7b2cbf; border-radius: 12px; padding: 16px; margin: 18px 0; }',
+        'pre { white-space: pre-wrap; border: 1px solid #ccc; border-radius: 12px; padding: 16px; background: #fafafa; }',
+        '@media print { .no-print { display: none; } body { padding: 12px; } }',
+        '</style>',
+        '</head>',
+        '<body>',
+        '<h1>Build-a-Carbohydrate Lab™</h1>',
+        '<div class="directions">',
+        '<h2>Canvas Submission Directions</h2>',
+        '<ol>',
+        '<li>Choose <strong>Save as PDF</strong> in the print window.</li>',
+        '<li>Save your file using this format: <strong>LastName_FirstName_CarbohydrateLab.pdf</strong>.</li>',
+        '<li>Upload the PDF to the Canvas assignment.</li>',
+        '</ol>',
+        '</div>',
+        '<pre>' + escapeHtml(content) + '</pre>',
+        '<p class="no-print">Use your browser print dialog to save this page as a PDF.</p>',
+        '</body>',
+        '</html>'
+      ].join('');
 
-          <div class="directions">
-            <h2>Canvas Submission Directions</h2>
-            <ol>
-              <li>Choose <strong>Save as PDF</strong> in the print window.</li>
-              <li>Save your file using this format: <strong>LastName_FirstName_CarbohydrateLab.pdf</strong>.</li>
-              <li>Upload the PDF to the Canvas assignment.</li>
-            </ol>
-          </div>
-
-          <pre>${content}</pre>
-
-          <script>
-            window.onload = function() {
-              window.print();
-            }
-          <\/script>
-        </body>
-        </html>
-      `);
-
+      printWindow.document.open();
+      printWindow.document.write(pdfHtml);
       printWindow.document.close();
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 250);
     });
+
+    function runDeveloperTests() {
+      console.group('Build-a-Carbohydrate Lab Tests');
+      console.assert(sameStructure(['glucose', 'fructose'], challenges.sucrose.correct) === true, 'Sucrose accepts glucose + fructose.');
+      console.assert(sameStructure(['fructose', 'glucose'], challenges.sucrose.correct) === true, 'Sucrose accepts either order.');
+      console.assert(sameStructure(['glucose', 'glucose'], challenges.sucrose.correct) === false, 'Sucrose rejects incorrect pair.');
+      console.assert(sameStructure(['glucose', 'galactose'], challenges.lactose.correct) === true, 'Lactose accepts correct pair.');
+      console.assert(sameStructure(['glucose', 'glucose'], challenges.maltose.correct) === true, 'Maltose accepts two glucose molecules.');
+      console.assert(formatAttempts('sucrose') === 'No attempts recorded', 'Empty attempts are formatted safely.');
+      console.assert(escapeHtml('<strong>test</strong>').includes('&lt;strong&gt;'), 'HTML escaping works for PDF content.');
+      console.groupEnd();
+    }
+
+    renderCurrentChallenge();
+    runDeveloperTests();
   </script>
 </body>
 </html>
